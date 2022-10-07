@@ -3,10 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 #code for ecommerce website using flask
 
-
-
-
-#change from PC dev branch
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
