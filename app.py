@@ -22,7 +22,7 @@ import os
 app = Flask(__name__)
 
 
-app.secret_key = 'asdaasdasdsdasdasasdasddasdasdasdaveasdaqvq34c'
+app.secret_key = 'asdaasdasdsdasdasasdasddasadswdasdsdasdasdaveasdaqvq34c'
 
 
 
