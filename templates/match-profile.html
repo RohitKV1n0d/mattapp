@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>RegistrationForm_v7 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+		
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="static/css/style.css">
+		
+		<style>
+		
+		.dropdown1 .btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: -1px 12px;
+  font-size: 14px;
+  line-height: -15.571;
+  border-radius: 50px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-top: -117px;
+  width: 49px;
+  background-color: #fff;
+  
+}
+		
+		.inner2 {
+  max-width: 758px;
+  margin: auto;
+    
+  margin-top: 68px !important;
+  background: #fff;
+  padding: 0px 0px 0px;
+
+}
+		
+		
+		
+		
+		select, button {
+  font-family: "Montserrat-Regular";
+  color: #ff339a;
+  font-size: 18px;
+  background-color: #fff;
+  height: 43px;
+  border: 1px solid #ff339a;
+  border-radius: 29px;
+  margin-bottom: 41px;
+}
+.column-1{
+width:50%;
+}
+.column-2{
+width:50%;
+background-color:#f63997;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 15px 12px 9px;
+  margin: 2px 0 63px;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.dropdown11 .btn{
+display: inline-block;
+margin-bottom: 0;
+font-weight: 400;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+background-image: none;
+border: 1px solid transparent;
+padding: -1px 12px;
+font-size: 14px;
+line-height: -15.571;
+border-radius: 8px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+margin-top: 15px;
+width: 60px;
+float:right;
+background-color:#fff;
+margin-right:11px;
+
+}
+.inner22 .fa{
+color:#ff339a;
+font-size:25px;
+}
+
+.text-center .btn-default {
+  color: #fff;
+  background-color: #ff339a;
+  border-color: #ff339a;
+  font-size: 22px;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 22px;
+  padding: 8px;
+}
+
+
+
+.text-center .btn-danger {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+  font-size: 22px;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 22px;
+  padding: 8px;
+}
+
+.text-center .btn-info {
+  color: #000;
+  background-color: #e6e6e6;
+  border-color: #e6e6e6;
+  font-size: 18px;
+  width:100% !important;
+  font-weight: bold;
+  margin-top: 22px;
+  padding-left: 8px;
+  text-align:left;
+}
+
+
+
+.text-center  .btn-primary {
+  color: #fff;
+  background-color: #ff339a;
+  border-color: #ff339a;
+  BORDER-RADIUS: 46PX;
+  border-radius: 15px 50px 30px;
+  font-size:22px;
+ 
+  font-weight:bold;
+}
+
+
+.text-center  .btn-primary a:hover {
+  color: #fff;
+  background-color: #ff339a;
+  border-color: #ff339a;
+  BORDER-RADIUS: 46PX;
+  border-radius: 15px 50px 30px;
+  font-size:22px;
+  width:300px;
+  font-weight:bold;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+
+
+
+
+input[type="text"] {
+  width: 13px;
+  box-sizing: border-box;
+  border: 0;
+  outline: none;
+  font-size: 16px;
+  background-color: #ff339a;
+  background-image: url(static/image/search.png);
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 37px 21px 20px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  float: left;
+  text-align:center;
+}
+
+input[type=text]:focus {
+    width: 300px;
+    border-top: 0;
+    border-right:0;
+    border-left:0;
+    border-bottom: 1px solid #ddd;
+}
+		</style>
+		
+		
+	</head>
+
+	<body>
+	<br>
+<br>
+  <div class="col-sm-12">
+<div class="inner33" style="background-color:#ff339a; margin-top:55px; max-height:55px;">
+
+ <div class="row">
+  <div class="col-sm-4 col-xs-4">  <form>
+  <input type="text" name="search" placeholder="Search here">
+</form>
+</div>
+<div class="col-sm-4 col-xs-5"> 
+  <img style="margin-top:22px;" src="static/image/logo-2.jpg">
+  </div>
+  <div class="col-sm-4 col-xs-3 "> <div class="dropdown11">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-list" aria-hidden="true"></i>
+
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>  </div>
+  
+</div> 
+</div>
+
+
+
+
+
+
+
+  <div class="column-1">
+ 
+  </div>
+  <div class="column-2"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<br>
+<br>
+
+<div class="clearfix"> </div>
+		<div class="wrapper">
+	
+		
+	<div class="inner22">
+<img src="static/image/profile.jpg">
+
+<div class="text-center">
+  
+<div class="col-xs-4"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa fa-envelope" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+<div class="col-xs-4"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa fa-heart" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+<div class="col-xs-4"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-star" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+  
+  
+  
+  
+
+  
+  
+  
+  
+</div>
+</div>	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	<div class="inner55">	
+		
+			
+	<div class="text-center">
+  
+  
+  
+  <div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-default">Light</button>
+  
+</div>  </div>
+  
+  
+  
+<div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-danger">Light</button>
+  
+</div>  </div>
+
+
+<div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">christian</button>
+  
+</div>  </div>
+
+<div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">malankara catholic</button>
+  
+</div>  </div>
+  
+  
+  <div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">30</button>
+  
+</div>  </div>
+  
+
+ <div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">fair</button>
+  
+</div>  </div> 
+ 
+ <div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">168cm/65kg</button>
+  
+</div>  </div><div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">unmarried</button>
+  
+</div>  </div> 
+ <div class="col-xs-12"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">ernakulam</button>
+  
+</div>  </div>
+ 
+  <div class="col-xs-12"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">bsc science</button>
+  
+</div>  </div>
+
+
+
+
+
+
+<div class="col-xs-12"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">bank manager</button>
+  
+</div>  </div>
+</div>	</div>	
+
+
+
+
+
+
+
+
+
+
+
+<div class="inner22">
+<img src="static/image/profile.jpg">
+
+<div class="text-center">
+  
+<div class="col-xs-4"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa fa-envelope" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+<div class="col-xs-4"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa fa-heart" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+<div class="col-xs-4"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-star" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+  
+  
+  
+  
+
+  
+  
+  
+  
+</div>
+</div>
+
+
+
+
+<div class="inner55">	
+		
+			
+	<div class="text-center">
+  
+  
+  
+  <div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-default">Light</button>
+  
+</div>  </div>
+  
+  
+  
+<div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-danger">Light</button>
+  
+</div>  </div>
+
+
+<div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">christian</button>
+  
+</div>  </div>
+
+<div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">malankara catholic</button>
+  
+</div>  </div>
+  
+  
+  <div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">30</button>
+  
+</div>  </div>
+  
+
+ <div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">fair</button>
+  
+</div>  </div> 
+ 
+ <div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">168cm/65kg</button>
+  
+</div>  </div><div class="col-xs-6"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">unmarried</button>
+  
+</div>  </div> 
+ <div class="col-xs-12"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">ernakulam</button>
+  
+</div>  </div>
+ 
+  <div class="col-xs-12"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">bsc science</button>
+  
+</div>  </div>
+
+
+
+
+
+
+<div class="col-xs-12"> <div class="dropdown1">
+  <button type="button" class="btn btn-info">bank manager</button>
+  
+</div>  </div>
+</div>	</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<br><br>
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</body>
+</html>

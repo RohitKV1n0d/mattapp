@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>RegistrationForm_v7 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">  
+		
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/register_style.css') }}">
+		
+
+  
+		
+	</head>
+
+
+  
+	<body>
+<div class="inner1" style="background-color:#f63997; margin-top:55px;">
+
+ <div class="row">
+  <div class="col-sm-6 col-xs-6"> <img src="{{ url_for('static', filename='image/logo.jpg') }}"></div>
+  <div class="col-sm-4 col-xs-3"> <h2 style="text-align:center; font-weight:bold; margin-top:38px; padding-left: 150px ; font-size:small;"> log in </h2></div>
+  <div class="col-sm-2 col-xs-3"> <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-list" aria-hidden="true"></i>
+
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>  </div>
+  
+</div> 
+
+
+
+
+
+
+
+
+  <div class="column-1">
+ 
+  </div>
+  <div class="column-2"></div>
+
+<img src="{{ url_for('static', filename='image/bg-registration-form-7.jpg') }}">
+
+
+</div>
+<br>
+<div class="text-center">
+      <button type="button" class="btn btn-primary"> REGISTER FREE</button>
+    </div>
+<div class="clearfix"> </div>
+		<div class="wrapper" style=" margin-top:55px;">
+	
+			<div class="inner">
+			
+			
+
+				<form  action="{{ url_for('register') }}" method="post" id="form1">
+          <label >Your Name</label>
+          <label class="form-group">
+              <input type="text" class="form-control" name="name"  required>  
+              <span class="border"></span>
+          </label>
+            
+            
+          <fieldset data-role="controlgroup"  style="margin-bottom: 50px;" class="nested_check_in" >
+            <label style="color: white; padding-right: 40px;">Choose your gender :</label>
+            <div class="form-control" >
+              
+              <label  for="male" >Male</label>
+              <input type="radio" name="gender" id="male" value="male" checked>
+              <label for="female">Female</label>
+              <input type="radio" name="gender" id="female" value="female">
+            </div>
+            </fieldset> 
+
+
+              <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+              <div class="nested_boxes">
+                <div class="form-row" >
+                  <label style="color: white; padding-right: 40px;">Choose your gender :</label>
+
+                  <div class="form-group">
+                    <div class="nested_check_in"><label><input type="checkbox" class="radio" value="1" name="fooby[1][]" />Male</label></div>
+                  </div>
+                  <div class="form-group">
+                    <div class="nested_check_in"><label><input type="checkbox" class="radio" value="1" name="fooby[1][]" />Female</label></div>
+                  </div> 
+                </div>
+              </div>  
+              
+              <script>
+                // the selector will match all input controls of type :checkbox
+                // and attach a click event handler 
+                $("input:checkbox").on('click', function() {
+                  // in the handler, 'this' refers to the box clicked on
+                  var $box = $(this);
+                  if ($box.is(":checked")) {
+                    // the name of the box is retrieved using the .attr() method
+                    // as it is assumed and expected to be immutable
+                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                    // the checked state of the group/box on the other hand will change
+                    // and the current value is retrieved using .prop() method
+                    $(group).prop("checked", false);
+                    $box.prop("checked", true);
+                  } else {
+                    $box.prop("checked", false);
+                  }
+                });
+              </script>  -->
+
+              
+
+
+            <div><span style="font-weight:bolder;">Date of birth</span></div>
+            <label class="form-group"> 
+              <input type="date" class="form-control" name="dob"  required>
+              <span class="border"></span>
+            </label>
+
+
+            <label class="form-group">
+              <label >Mobile Number</label>
+              <input type="text" class="form-control" value="+91 " name="phoneNumber" required>
+              <span class="border"></span>
+            </label>
+
+            
+            <label class="form-group" >
+              <label >Religion</label>
+              <input type="text" class="form-control" name="religion" required>
+              <span class="border"></span>
+            </label>
+            
+            <label class="form-group" >
+              <label >Caste</label>
+              <input type="text" class="form-control" name="caste" required>
+              <span class="border"></span>
+            </label>
+
+            <div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">I have read and agree to the  <span style="color:#0066FF;">terms of use </span>and <span style="color:#0066FF;"> privacy policy </span></label></div>
+            <br>
+            <button type="submit" form="form1" >Submit 
+              <i class="zmdi zmdi-arrow-right"></i>
+            </button>
+				</form>
+				
+				
+	
+			</div>
+			
+			
+			
+		</div>
+		
+		<br><br>
+			<div class="container">
+			<div class="main">
+				<div class="main-center">
+				<h5>Sign up once and watch any of our free demos.</h5>
+				
+				
+				
+				
+					<form action="/action_page.php">
+ 
+
+<div class="nested_boxes"><form>
+<div class="form-row">
+<div class="form-group">
+<div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">Bride</label></div>
+</div>
+<div class="form-group">
+<div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">Groom</label></div>
+</div>
+
+
+
+
+
+</div>
+</form></div>
+  <select style="width:45%;" name="cars" id="cars">
+    <option value="volvo">Age</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+  
+  
+  <select style="width:45%; margin-left:8%;" name="cars" id="cars">
+    <option value="volvo">Age</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+  
+  
+  
+  
+  <select style="width:100%;"  name="cars" id="cars">
+    <option value="volvo">Religion</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+  
+  <select style="width:100%;"  name="cars" id="cars">
+    <option value="volvo">Caste</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+  <select style="width:100%;"  name="cars" id="cars">
+    <option value="volvo">Mariatal status</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+  
+  
+  
+  <br><br>
+ <div class="text-center">
+      <button type="button" class="btn btn-default"> submit</button>
+    </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</form>
+
+				</div><!--main-center"-->
+			</div><!--main-->
+		</div>
+		
+				<div class="text-center">
+				<H4 style=" color:#000000; font-weight:bold; font-size:33px;"> FOR ENQUIRY   +91  807800801</H4>
+    </div>	
+				
+		<div class="text-center">
+				<img src="{{ url_for('static', filename='image/logo.jpg') }}">
+    </div>
+	
+	
+		  <div class="inner2">
+            <div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="Profile id search">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+     </div>       
+    </div>
+	
+	
+	
+	<div class="text-center">
+		<div class="text-center">
+      <button  type="button" class="btn btn-default"> DO payment</button>
+    </div>		
+    </div>
+	
+	
+	
+	
+	
+	
+	<div class="inner2">
+
+<div class="row">
+ 
+
+     
+ 
+ 
+ 
+ 
+ 
+ <div class="text-center">
+  
+<div class="col-xs-2"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-facebook-f"></i>
+
+  </button>
+  
+</div>  </div>
+<div class="col-xs-2"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa fa-twitter" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+<div class="col-xs-2"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-instagram" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+  
+  
+  
+  <div class="col-xs-2"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa fa-youtube-play" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+<div class="col-xs-2"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa fa-whatsapp" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+  
+  <div class="col-xs-2"> <div class="dropdown1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <i class="fa fa-google-plus" aria-hidden="true"></i>
+
+
+  </button>
+  
+</div>  </div>
+  
+  
+</div></div></div>
+	</body>
+</html>
