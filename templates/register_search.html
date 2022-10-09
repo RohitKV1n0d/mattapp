@@ -26,7 +26,8 @@
 
  <div class="row">
   <div class="col-sm-6 col-xs-6"> <img src="{{ url_for('static', filename='image/logo.jpg') }}"></div>
-  <div class="col-sm-4 col-xs-3"> <h2 style="text-align:center; font-weight:bold; margin-top:38px; padding-left: 150px ; font-size:small;"> log in </h2></div>
+  <a href="login">  <div class="col-sm-4 col-xs-3"> <h2 style="text-align:center; font-weight:bold; margin-top:38px;  font-size:small;"> log in </h2></div></a>
+
   <div class="col-sm-2 col-xs-3"> <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <i class="fa fa-list" aria-hidden="true"></i>
@@ -73,6 +74,18 @@
           <label class="form-group">
               <input type="text" class="form-control" name="name"  required>  
               <span class="border"></span>
+          </label>
+
+          <label class="form-group" >
+            <label >Email</label>
+            <input type="email" class="form-control" name="email" required>
+            <span class="border"></span>
+          </label>
+
+          <label class="form-group" >
+            <label >Password</label>
+            <input type="password" class="form-control" name="password" required>
+            <span class="border"></span>
           </label>
             
             
@@ -151,6 +164,8 @@
               <input type="text" class="form-control" name="caste" required>
               <span class="border"></span>
             </label>
+
+            
 
             <div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">I have read and agree to the  <span style="color:#0066FF;">terms of use </span>and <span style="color:#0066FF;"> privacy policy </span></label></div>
             <br>

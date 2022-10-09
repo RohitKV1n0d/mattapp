@@ -1,11 +1,17 @@
 
 
+import email
+from msilib.schema import Class
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from flask-login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
+from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import validators
+from wtforms.validators import InputRequired, Email, Length
 import os
 
 
@@ -24,7 +30,7 @@ ENV = 'dev'
 
 if ENV == 'dev' :
     app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
     app.config['SECRET_KEY'] = 'asdasdasdasdasdasdasdaveqvq34c'
 
 else:
@@ -48,11 +54,25 @@ admin = Admin(app, name='Admin', template_mode='bootstrap3')
 
 
 
+login = LoginManager()
+login.init_app(app)
+login.login_view = 'login'
 
-class UserDetails(db.Model):
+@login.user_loader
+def load_user(id):
+    return UserDetails.query.get(int(id))
+
+
+
+
+
+class UserDetails(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), nullable=False)
-    # userimage = db.Column(db.String(200), nullable=False)
+    password  = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(200), nullable=False)
+    userRole =db.Column(db.String(200), nullable=False)
+    userimage = db.Column(db.String(200), nullable=True)
     profileId = db.Column(db.String(200), nullable=False)
     gender = db.Column(db.Integer, nullable=False)
     dob = db.Column(db.String(300), nullable=False) 
@@ -129,15 +149,39 @@ class UserDetails(db.Model):
         return '<UserDetails %r>' % self.name
 
 class MyModelView(ModelView):
+    can_export = True
+    column_exclude_list = ['password']
+    column_searchable_list = ['name', 'email', 'phoneNumber']
+    column_filters = ['name', 'email', 'phoneNumber']
+    column_editable_list = ['name', 'email', 'phoneNumber']
+    #export csv file
+    def export_csv(self, model, **kwargs):
+        return self._export_csv(model, **kwargs)
+        
     def is_accessible(self):
         return current_user.is_authenticated
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
-        return redirect(url_for('login', next=request.url))
+        return redirect(url_for('login'))
+
+
+
+
+
 
 
 admin.add_view(ModelView(UserDetails, db.session))
+
+
+class LoginForm(FlaskForm):
+    username = StringField('username', validators=[InputRequired('username is required'),Length(min=3,max=20), ])
+    password = PasswordField('password', validators= [InputRequired(), Length(min=6, max=81, message=('8 letters!')) ])
+    submit = SubmitField("Login")
+
+
+
+
 
 
 
@@ -148,7 +192,9 @@ admin.add_view(ModelView(UserDetails, db.session))
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        userDetails = UserDetails(name=request.form['name'],profileId="TestONLY",gender=request.form['gender'],dob=request.form['dob'],phoneNumber=request.form['phoneNumber'],religion=request.form['religion'],caste=request.form['caste'])
+        userDetails = UserDetails(name=request.form['name'],password=request.form['password'],email=request.form['email'] ,profileId="TestONLY",userRole="user",gender=request.form['gender'],
+                                                    dob=request.form['dob'],phoneNumber=request.form['phoneNumber'],
+                                                    religion=request.form['religion'],caste=request.form['caste'])
         try:
             db.session.add(userDetails)
             db.session.commit()
@@ -158,7 +204,32 @@ def register():
     else:   
         userDetails = UserDetails.query.order_by(UserDetails.id).all()
         return render_template('register_search.html', userDetails=userDetails)
- 
+
+
+@app.route('/login', methods = ["GET",'POST'])
+def login():
+    
+    if request.method == 'POST':
+        user = UserDetails.query.filter_by(email=request.form['email']).first()
+        if user:
+            if request.form['password'] == user.password:
+                login_user(user)
+                return redirect(url_for('home'))
+
+    return render_template('login.html')
+
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/home')
+@login_required
+def home():
+    return render_template('index.html')
 
 
 
