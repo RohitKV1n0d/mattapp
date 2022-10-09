@@ -26,7 +26,7 @@ app.secret_key = 'asdaasdasdsdasdasasdasddasadswdasdsdasdasdaveasdaqvq34c'
 
 
 
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev' :
     app.debug = True
