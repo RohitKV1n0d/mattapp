@@ -17,6 +17,7 @@ def create_admin(self):
                                                 dob="none",phoneNumber="0000000000",
                                                 religion="none",caste="none")
     
+    
         db.session.add(userDetails)
         db.session.commit()
         print("Admin created")

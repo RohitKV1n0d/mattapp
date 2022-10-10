@@ -73,8 +73,6 @@ def load_user(id):
 
 
 
-
-
 class UserDetails(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), nullable=False)
@@ -154,9 +152,9 @@ class UserDetails(db.Model, UserMixin):
     pState = db.Column(db.String(200), nullable=True)
     pDistrict = db.Column(db.String(200), nullable=True)
 
+
     def __repr__(self):
         return '<UserDetails %r>' % self.name
-
 
 class FilterDetails(db.Model):
     id = db.Column(db.Integer, primary_key=True)
