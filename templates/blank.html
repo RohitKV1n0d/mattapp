@@ -18,7 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -358,9 +358,49 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <a href="{{ url_for('download_csv') }}" style="margin-bottom: 10px; margin-left: 10px;" class="btn btn-primary" type="button">
+                        Download Csv  <i class="fa fa-file-csv"></i>
+                    </a>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                  
+                    <div class="ani">
+                        <span class="text"><h1></h1> Blank <span class="pop">Page</span></span>
+                      </div>
+
+                    
+                      <style>
+                        .ani {
+
+	 width: 100%;
+	 font-size: 2em;
+}
+ .text {
+	 position: relative;
+	 font-family: 'BioRhyme', serif;
+}
+ .text:before {
+	 content: '';
+	 position: absolute;
+	 top: 50%;
+	 left: -4px;
+	 right: -4px;
+	 height: 4px;
+	 background: red;
+	 transform: scale3d(0, 1, 1);
+	 transform-origin: left;
+	 animation: strike 0.5s forwards cubic-bezier(0.7, 0, 0, 1) 0.3s;
+}
+ @keyframes strike {
+	 to {
+		 transform: scale3d(1, 1, 1);
+	}
+}
+ .text .pop {
+	 position: relative;
+	 z-index: 2;
+}
+                      </style>
 
                 </div>
                 <!-- /.container-fluid -->
