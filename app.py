@@ -83,7 +83,7 @@ class UserDetails(db.Model, UserMixin):
     userRole =db.Column(db.String(200), nullable=False)
     userimage = db.Column(db.String(200), nullable=True)
     profileId = db.Column(db.String(200), nullable=False)
-    gender = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.String(200), nullable=False)
     dob = db.Column(db.String(300), nullable=False) 
     hight = db.Column(db.Integer, nullable=True)
     complexion = db.Column(db.String(200), nullable=True)    
