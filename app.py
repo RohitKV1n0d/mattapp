@@ -50,7 +50,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 db =SQLAlchemy(app)
 
-class MyAdminIndexView(AdminIndexView):
+
+class MyModelView(ModelView):
     BaseModelView.can_export = True
     BaseModelView.export_types = ['csv', 'xls']
     def is_accessible(self):
@@ -59,7 +60,20 @@ class MyAdminIndexView(AdminIndexView):
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login'))
 
-admin = Admin(app, name='Admin', template_mode='bootstrap3')
+    def not_auth(self):
+        return redirect(url_for('login'))
+
+class MyAdminIndexView(AdminIndexView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+        
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('login'))
+
+    def not_auth(self):
+        return redirect(url_for('login'))
+
+admin = Admin(app,index_view=MyAdminIndexView(),template_mode='bootstrap3')
 
 
 
@@ -79,6 +93,8 @@ class UserDetails(db.Model, UserMixin):
     password  = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), nullable=False)
     userRole =db.Column(db.String(200), nullable=False)
+    premiumPackage = db.Column(db.String(200), nullable=True)#
+    contactsLeft = db.Column(db.Integer, nullable=True)# 
     userimage = db.Column(db.String(200), nullable=True)
     profileId = db.Column(db.String(200), nullable=False)
     gender = db.Column(db.String(200), nullable=False)
@@ -114,14 +130,16 @@ class UserDetails(db.Model, UserMixin):
     prefferedContactPersonName = db.Column(db.String(200), nullable=True)
     prefferedContactRelaion = db.Column(db.String(200), nullable=True)
     fatherName = db.Column(db.String(200), nullable=True)
-    motherName = db.Column(db.String(200), nullable=True)
+    fatherEducation = db.Column(db.String(200), nullable=True)####
     fatherOccupation = db.Column(db.String(200), nullable=True)
     fatherOccupationDetail = db.Column(db.String(200), nullable=True)
+    motherName = db.Column(db.String(200), nullable=True)#@##
+    motherEducation = db.Column(db.String(200), nullable=True)####
     motherOccupation = db.Column(db.String(200), nullable=True)
     motherOccupationDetail = db.Column(db.String(200), nullable=True)
     noOfMarriedBrothers = db.Column(db.Integer, nullable=True)
-    noOfUnmarriedBrothers = db.Column(db.Integer, nullable=True)
-    noOfMarriedSisters = db.Column(db.Integer, nullable=True)
+    noOfMarriedSisters = db.Column(db.Integer, nullable=True)#
+    noOfUnmarriedBrothers = db.Column(db.Integer, nullable=True)#@
     noOfUnmarriedSisters = db.Column(db.Integer, nullable=True)
     familyType = db.Column(db.String(200), nullable=True)
     familyValue = db.Column(db.String(200), nullable=True)
@@ -129,6 +147,7 @@ class UserDetails(db.Model, UserMixin):
     userOwnerOF = db.Column(db.String(200), nullable=True)
     eatingHabbits = db.Column(db.String(200), nullable=True)
     drinkingHabbits = db.Column(db.String(200), nullable=True)
+    somkingHabbits = db.Column(db.String(200), nullable=True)##
     languegesKnow = db.Column(db.String(200), nullable=True)
     hobbies = db.Column(db.String(200), nullable=True)
     intrests = db.Column(db.String(200), nullable=True)
@@ -151,10 +170,33 @@ class UserDetails(db.Model, UserMixin):
     pCountry = db.Column(db.String(200), nullable=True)
     pState = db.Column(db.String(200), nullable=True)
     pDistrict = db.Column(db.String(200), nullable=True)
+    lookingFor = db.Column(db.String(200), nullable=True)
+    about = db.Column(db.String(200), nullable=True)
+
+    # image = db.relationship('Image', backref='Iamges')
 
 
     def __repr__(self):
         return '<UserDetails %r>' % self.name
+
+
+
+# class Images(db.Model):
+#     __tablename__ = 'images'
+#     img_id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(128))
+#     path = db.Column(db.String, unique=True)
+#     fId = db.Column(db.Integer, db.ForeignKey('userdetails.id'))
+
+#     def __repr__(self):
+#         return self.name
+
+
+
+
+
+
+
 
 class FilterDetails(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -162,6 +204,7 @@ class FilterDetails(db.Model):
     height = db.Column(db.String(200), nullable=True)
     weight = db.Column(db.String(200), nullable=True)
     bloodtype = db.Column(db.String(200), nullable=True)
+    bodytype = db.Column(db.String(200), nullable=True) ######
     complexion = db.Column(db.String(200), nullable=True)
     physcialstatus = db.Column(db.String(200), nullable=True)
     maritalstatus = db.Column(db.String(200), nullable=True)
@@ -216,8 +259,8 @@ class FilterDetails(db.Model):
 
 
 
-admin.add_view(ModelView(UserDetails, db.session))
-admin.add_view(ModelView(FilterDetails, db.session))
+admin.add_view(MyModelView(UserDetails, db.session))
+admin.add_view(MyModelView(FilterDetails, db.session))
 
 
 class LoginForm(FlaskForm):
@@ -237,19 +280,24 @@ class LoginForm(FlaskForm):
 @app.route('/')
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        userDetails = UserDetails(name=request.form['name'],password=request.form['password'],email=request.form['email'] ,profileId="TestONLY",userRole="user",gender=request.form['gender'],
-                                                    dob=request.form['dob'],phoneNumber=request.form['phoneNumber'],
-                                                    religion=request.form['religion'],caste=request.form['caste'])
-        # try:
-        db.session.add(userDetails)
-        db.session.commit()
-        return redirect('/')
-        # except:
-            # return 'There was an issue adding your task'
-    else:   
-        userDetails = UserDetails.query.order_by(UserDetails.id).all()
-        return render_template('register_search.html', userDetails=userDetails)
+
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    else:
+        if request.method == 'POST':
+            userDetails = UserDetails(name=request.form['name'],password=request.form['password'], email=request.form['email'] , profileId="TestONLY", userRole="user", premiumPackage="None",
+                                                        contactsLeft=0,gender=request.form['gender'], dob=request.form['dob'], phoneNumber=request.form['phoneNumber'],
+                                                        religion=request.form['religion'], caste=request.form['caste'])
+            try:
+                db.session.add(userDetails)
+                db.session.commit()
+                return redirect('login')
+            except:
+                return 'There was an issue adding your task'
+        else:   
+            userDetails = UserDetails.query.order_by(UserDetails.id).all()
+            return render_template('register_search.html', userDetails=userDetails)
 
 
 @app.route('/login', methods = ["GET",'POST'])
@@ -275,7 +323,7 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('index.html')
+    return render_template('registerDone_search.html',name=current_user.name)
 
 
 

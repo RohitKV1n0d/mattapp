@@ -15,7 +15,12 @@
 }
 
 
-
+inner1 h2 {
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 38px;
+}
 
   
 		
@@ -67,6 +72,7 @@
     border: 1px solid #ff339a;
     border-radius: 29px;
     margin-bottom: 41px;
+    
   }
   .column-1{
   width:50%;
@@ -234,7 +240,7 @@ body {
 
 input, textarea, select, button {
   font-family: "Montserrat-Regular";
-  color: #fff;
+  
   font-size: 15px; }
 
 p, h1, h2, h3, h4, h5, h6, ul {
