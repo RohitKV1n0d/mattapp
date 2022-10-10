@@ -241,12 +241,12 @@ def register():
         userDetails = UserDetails(name=request.form['name'],password=request.form['password'],email=request.form['email'] ,profileId="TestONLY",userRole="user",gender=request.form['gender'],
                                                     dob=request.form['dob'],phoneNumber=request.form['phoneNumber'],
                                                     religion=request.form['religion'],caste=request.form['caste'])
-        try:
-            db.session.add(userDetails)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue adding your task'
+        # try:
+        db.session.add(userDetails)
+        db.session.commit()
+        return redirect('/')
+        # except:
+            # return 'There was an issue adding your task'
     else:   
         userDetails = UserDetails.query.order_by(UserDetails.id).all()
         return render_template('register_search.html', userDetails=userDetails)
