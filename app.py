@@ -35,7 +35,7 @@ app.config['UPLOAD_FOLDER_IMPORT'] = UPLOAD_FOLDER
 
 ENV = 'dev'
 
-if ENV == 'dev' :
+if ENV == 'prod' :
     app.debug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
     app.config['SECRET_KEY'] = 'asdasdasdasdasdasdasdaveqvq34c'
