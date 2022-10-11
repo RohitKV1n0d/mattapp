@@ -94,7 +94,7 @@ class ImportData(BaseView):
             for i in range(1, sheet.nrows):
                 addUsers = UserDetails(name=sheet.cell_value(i, 0), password="defpass123", email=str(sheet.cell_value(i, 1))+"@email.com", userRole="user",
                                         premiumPackage="free", contactsLeft=0, profileId=sheet.cell_value(i, 1), gender=sheet.cell_value(i, 2),
-                                        dob=sheet.cell_value(i, 3), hight=sheet.cell_value(i, 4), weight=sheet.cell_value(i, 5),
+                                        dob=sheet.cell_value(i, 3), hight=str(sheet.cell_value(i, 4)), weight=str(sheet.cell_value(i, 5)),
                                         complexion=sheet.cell_value(i, 6), bodyType=sheet.cell_value(i, 7), maritalStatus=sheet.cell_value(i, 8),
                                         noOfChildren=sheet.cell_value(i, 9), physicalStatus=sheet.cell_value(i, 10), motherTongue=sheet.cell_value(i, 11),
                                         nativePlace=sheet.cell_value(i, 12), bloodGroup=sheet.cell_value(i, 13), profileCreatedfor=sheet.cell_value(i, 14),
@@ -181,8 +181,8 @@ class UserDetails(db.Model, UserMixin):
     profileId = db.Column(db.String(200), nullable=False)
     gender = db.Column(db.String(200), nullable=False)
     dob = db.Column(db.String(300), nullable=False) 
-    hight = db.Column(db.String(300), nullable=False) 
-    weight = db.Column(db.String(300), nullable=False) 
+    hight = db.Column(db.String(200), nullable=False) 
+    weight = db.Column(db.String(200), nullable=False) 
     complexion = db.Column(db.String(200), nullable=True)    
     bodyType = db.Column(db.String(200), nullable=True)
     maritalStatus = db.Column(db.String(200), nullable=True)
