@@ -181,8 +181,8 @@ class UserDetails(db.Model, UserMixin):
     profileId = db.Column(db.String(200), nullable=False)
     gender = db.Column(db.String(200), nullable=False)
     dob = db.Column(db.String(300), nullable=False) 
-    hight = db.Column(db.Integer, nullable=True)
-    weight = db.Column(db.Integer, nullable=True)###
+    hight = db.Column(db.String(300), nullable=False) 
+    weight = db.Column(db.String(300), nullable=False) 
     complexion = db.Column(db.String(200), nullable=True)    
     bodyType = db.Column(db.String(200), nullable=True)
     maritalStatus = db.Column(db.String(200), nullable=True)
