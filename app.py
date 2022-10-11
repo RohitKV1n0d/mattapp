@@ -254,7 +254,7 @@ class UserDetails(db.Model, UserMixin):
     pState = db.Column(db.String(200), nullable=True)
     pDistrict = db.Column(db.String(200), nullable=True)
     lookingFor = db.Column(db.String(200), nullable=True)
-    about = db.Column(db.String(200), nullable=True)
+    about = db.Column(db.Text, nullable=True)
 
     # image = db.relationship('Image', backref='Iamges')
 
