@@ -220,10 +220,10 @@ class UserDetails(db.Model, UserMixin):
     motherEducation = db.Column(db.String(200), nullable=True)####
     motherOccupation = db.Column(db.String(200), nullable=True)
     motherOccupationDetail = db.Column(db.String(200), nullable=True)
-    noOfMarriedBrothers = db.Column(db.Integer, nullable=True)
-    noOfMarriedSisters = db.Column(db.Integer, nullable=True)#
-    noOfUnmarriedBrothers = db.Column(db.Integer, nullable=True)#@
-    noOfUnmarriedSisters = db.Column(db.Integer, nullable=True)
+    noOfMarriedBrothers = db.Column(db.String(200), nullable=True)
+    noOfMarriedSisters = db.Column(db.String(200), nullable=True)#
+    noOfUnmarriedBrothers = db.Column(db.String(200), nullable=True)#@
+    noOfUnmarriedSisters = db.Column(db.String(200), nullable=True)
     familyType = db.Column(db.String(200), nullable=True)
     familyValue = db.Column(db.String(200), nullable=True)
     financialStatus = db.Column(db.String(200), nullable=True)
@@ -234,10 +234,10 @@ class UserDetails(db.Model, UserMixin):
     languegesKnow = db.Column(db.String(200), nullable=True)
     hobbies = db.Column(db.String(200), nullable=True)
     intrests = db.Column(db.String(200), nullable=True)
-    minAge = db.Column(db.Integer, nullable=True)
-    maxAge = db.Column(db.Integer, nullable=True)
-    minHeight = db.Column(db.Integer, nullable=True)
-    maxHeight = db.Column(db.Integer, nullable=True)
+    minAge = db.Column(db.String(200), nullable=True)
+    maxAge = db.Column(db.String(200), nullable=True)
+    minHeight = db.Column(db.String(200), nullable=True)
+    maxHeight = db.Column(db.String(200), nullable=True)
     pComplexion = db.Column(db.String(200), nullable=True)
     pBodyType = db.Column(db.String(200), nullable=True)
     pMaritalStatus = db.Column(db.String(200), nullable=True)
