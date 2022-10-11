@@ -1,0 +1,27 @@
+{% extends 'admin/master.html' %}
+<!-- head css -->
+{% block head_css %}
+    {{ super() }}   
+{% endblock %}
+
+
+
+
+{% block body %}
+  <h1>Test Import</h1>
+
+
+  {% block content %}
+    
+        #input only xlsx file
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" />
+            <input type="submit" name="submit" value="upload to database" />
+
+            
+{% endblock %}
+
+
+
+{% endblock %}
+

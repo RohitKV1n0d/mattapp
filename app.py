@@ -1,18 +1,22 @@
 
 
 
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask_admin import Admin ,AdminIndexView
+from flask_admin import Admin ,AdminIndexView, BaseView, expose
 from flask_admin.model.base import BaseModelView
 from flask_admin.contrib.sqla import ModelView
+from flask_admin.form.upload import ImageUploadField
 from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms import validators
 from wtforms.validators import InputRequired, Email, Length
 import os
+import pandas as pd
+import xlrd
 
 
 
@@ -24,6 +28,8 @@ app = Flask(__name__)
 
 app.secret_key = 'asdaasdasdsdasdasasdasddasadswdasdsdasdasdaveasdaqvq34c'
 
+UPLOAD_FOLDER = 'static/uploads/'
+app.config['UPLOAD_FOLDER_IMPORT'] = UPLOAD_FOLDER
 
 
 ENV = 'prod'
@@ -55,23 +61,99 @@ class MyModelView(ModelView):
     BaseModelView.can_export = True
     BaseModelView.export_types = ['csv', 'xls']
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.userRole == 'admin':
+            return current_user.is_authenticated
+        else:
+            return False
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('login'))
+        return redirect(url_for('register'))
 
     def not_auth(self):
-        return redirect(url_for('login'))
+        return redirect(url_for('register'))
+
+    #image 
+   
+
+
+    
+
+
+
+
+
+
+class ImportData(BaseView):
+    @expose('/', methods=['GET', 'POST'])
+    def index(self):
+        #post to get file
+        def xlsx_to_database(filename):
+            wb = xlrd.open_workbook(filename)
+            sheet = wb.sheet_by_index(3)
+            sheet.cell_value(0, 0)
+            for i in range(1, sheet.nrows):
+                addUsers = UserDetails(name=sheet.cell_value(i, 0), password="defpass123", email=str(sheet.cell_value(i, 1))+"@email.com", userRole="user",
+                                        premiumPackage="free", contactsLeft=0, profileId=sheet.cell_value(i, 1), gender=sheet.cell_value(i, 2),
+                                        dob=sheet.cell_value(i, 3), hight=sheet.cell_value(i, 4), weight=sheet.cell_value(i, 5),
+                                        complexion=sheet.cell_value(i, 6), bodyType=sheet.cell_value(i, 7), maritalStatus=sheet.cell_value(i, 8),
+                                        noOfChildren=sheet.cell_value(i, 9), physicalStatus=sheet.cell_value(i, 10), motherTongue=sheet.cell_value(i, 11),
+                                        nativePlace=sheet.cell_value(i, 12), bloodGroup=sheet.cell_value(i, 13), profileCreatedfor=sheet.cell_value(i, 14),
+                                        religion=sheet.cell_value(i, 15), caste=sheet.cell_value(i, 16), star=sheet.cell_value(i, 17),
+                                        jathakam=sheet.cell_value(i, 18), educationCategory=sheet.cell_value(i, 19), educationType=sheet.cell_value(i, 20),
+                                        occupation=sheet.cell_value(i, 21), occupationType=sheet.cell_value(i, 22), jobcountry=sheet.cell_value(i, 23),
+                                        jobstate=sheet.cell_value(i, 24), jobdistrict=sheet.cell_value(i, 25), jobcity=sheet.cell_value(i, 26),
+                                        anualIncome=sheet.cell_value(i, 27), residenceAddr=sheet.cell_value(i, 28), userLocation=sheet.cell_value(i, 29),
+                                        phoneNumber=sheet.cell_value(i, 30), whatsapp=sheet.cell_value(i, 31), prefferedContact=sheet.cell_value(i, 32),
+                                        prefferedContactPersonName=sheet.cell_value(i, 33), prefferedContactRelaion=sheet.cell_value(i, 34), fatherName=sheet.cell_value(i, 35),
+                                        fatherEducation=sheet.cell_value(i, 36), fatherOccupation=sheet.cell_value(i, 37), fatherOccupationDetail=sheet.cell_value(i, 38),
+                                        motherName=sheet.cell_value(i, 39), motherEducation=sheet.cell_value(i, 40), motherOccupation=sheet.cell_value(i, 41),
+                                        motherOccupationDetail=sheet.cell_value(i, 42), noOfMarriedBrothers=sheet.cell_value(i, 43), noOfMarriedSisters=int(sheet.cell_value(i, 44)),
+                                        noOfUnmarriedBrothers=sheet.cell_value(i, 45), noOfUnmarriedSisters=sheet.cell_value(i, 46), familyType=sheet.cell_value(i, 47),
+                                        familyValue=sheet.cell_value(i, 48),
+                                        financialStatus=sheet.cell_value(i, 49), userOwnerOF=sheet.cell_value(i, 50), eatingHabbits=sheet.cell_value(i, 51),
+                                        drinkingHabbits=sheet.cell_value(i, 52), somkingHabbits=sheet.cell_value(i, 53), languegesKnow=sheet.cell_value(i, 54),
+                                        hobbies=sheet.cell_value(i, 55), intrests=sheet.cell_value(i, 56), minAge=sheet.cell_value(i, 57),
+                                        maxAge=sheet.cell_value(i, 58), minHeight=sheet.cell_value(i, 59), maxHeight=sheet.cell_value(i, 60),
+                                        pComplexion=sheet.cell_value(i, 61), pBodyType=sheet.cell_value(i, 62), pMaritalStatus=sheet.cell_value(i, 63),
+                                        pPhysicalStatus=sheet.cell_value(i, 64), pFamilyStatus=sheet.cell_value(i, 65), pReligion=sheet.cell_value(i, 66),
+                                        pCaste=sheet.cell_value(i, 67), pStar=sheet.cell_value(i, 68), pJaathakam=sheet.cell_value(i, 69),
+                                        pEducationCategory=sheet.cell_value(i, 70), pOccupation=sheet.cell_value(i, 71), pAnualIncome=sheet.cell_value(i, 72),
+                                        pCountry=sheet.cell_value(i, 73), pState=sheet.cell_value(i, 74), pDistrict=sheet.cell_value(i, 75),
+                                        lookingFor=sheet.cell_value(i, 76), about=sheet.cell_value(i, 77))
+                db.session.add(addUsers)
+                db.session.commit()
+                               
+
+           
+
+        if request.method == 'POST':
+            file = request.files['file']
+            if not file:
+                return "No file"
+            file.save(os.path.join(app.config['UPLOAD_FOLDER_IMPORT'], file.filename))
+            addImage = UserDetails.query.filter_by(id=current_user.id).first()
+            addImage.userimage = file.filename
+            db.session.commit()
+            xlsx_to_database(os.path.join(app.config['UPLOAD_FOLDER_IMPORT'], file.filename))
+            return redirect(url_for('admin.index'))
+        return self.render('admin/import.html')
+
+
 
 class MyAdminIndexView(AdminIndexView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.userRole == 'admin':
+            return current_user.is_authenticated
+        else:
+            return False
         
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('login'))
+        return redirect(url_for('register'))
 
     def not_auth(self):
-        return redirect(url_for('login'))
+        return redirect(url_for('register'))
+    
+
 
 admin = Admin(app,index_view=MyAdminIndexView(),template_mode='bootstrap3')
 
@@ -100,6 +182,7 @@ class UserDetails(db.Model, UserMixin):
     gender = db.Column(db.String(200), nullable=False)
     dob = db.Column(db.String(300), nullable=False) 
     hight = db.Column(db.Integer, nullable=True)
+    weight = db.Column(db.Integer, nullable=True)###
     complexion = db.Column(db.String(200), nullable=True)    
     bodyType = db.Column(db.String(200), nullable=True)
     maritalStatus = db.Column(db.String(200), nullable=True)
@@ -261,6 +344,7 @@ class FilterDetails(db.Model):
 
 admin.add_view(MyModelView(UserDetails, db.session))
 admin.add_view(MyModelView(FilterDetails, db.session))
+admin.add_view(ImportData())
 
 
 class LoginForm(FlaskForm):
@@ -323,7 +407,7 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('registerDone_search.html',name=current_user.name)
+    return render_template('registerDone_search.html',name=current_user.name,role=current_user.userRole)
 
 
 
