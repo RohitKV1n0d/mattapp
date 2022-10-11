@@ -4,6 +4,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import load_only
 from datetime import datetime
 from flask_admin import Admin ,AdminIndexView, BaseView, expose
 from flask_admin.model.base import BaseModelView
@@ -32,7 +33,7 @@ UPLOAD_FOLDER = 'static/uploads/'
 app.config['UPLOAD_FOLDER_IMPORT'] = UPLOAD_FOLDER
 
 
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev' :
     app.debug = True
@@ -337,9 +338,7 @@ class FilterDetails(db.Model):
     kannur = db.Column(db.String(200), nullable=True)
     kasaragod = db.Column(db.String(200), nullable=True)
 
-    def __repr__(self):
-        return '<FilterDetails %r>' % self.name
-
+   
 
 
 admin.add_view(MyModelView(UserDetails, db.session))
@@ -407,7 +406,14 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('registerDone_search.html',name=current_user.name,role=current_user.userRole)
+    gender = FilterDetails.query.with_entities(FilterDetails.gender).all()
+    # age = FilterDetails.query.with_entities(FilterDetails.age).all()
+    religion = FilterDetails.query.with_entities(FilterDetails.religion).all()
+    caste = FilterDetails.query.with_entities(FilterDetails.christianCaste,FilterDetails.muslimCaste,FilterDetails.hinduCaste).all()
+    maritalstatus  = FilterDetails.query.with_entities(FilterDetails.maritalstatus).all()
+    
+    print(caste)
+    return render_template('registerDone_search.html',name=current_user.name,role=current_user.userRole,gender=list(gender),religion=list(religion),caste=list(caste),maritalstatus=list(maritalstatus))
 
 
 

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>RegistrationForm_v7 by Colorlib</title>
+		<title>Welcome - Demo Search</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">  
@@ -81,77 +81,106 @@
 					<form action="/action_page.php">
  
 
-          <div class="nested_boxes"><form>
-          <div class="form-row">
-          <div class="form-group">
-          <div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">Bride</label></div>
-          </div>
-        <div class="form-group">
-        <div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">Groom</label></div>
-        </div>
+            <div class="nested_boxes" style="padding: 0;">
+            
+             
+                  
+                <div class="nested_boxes_gr">
+                  <fieldset data-role="controlgroup"  style="margin-bottom: 50px;" class="nested_check_in" >
+                    <!-- <label style="color: rgb(0, 0, 0); padding-right: 40px;">Choose </label> -->
+                    <div class="form-control" >
+                      
+                      <label class="nested_check_in"  style="color: #ff339a; padding-right: 40px;" for="male" >Bride</label>
+                      <input type="radio" name="gender" id="male" value="male" checked>
+                    </div>
+                    <div class="form-control">
+                      <label class="nested_check_in" style="color: #ff339a; padding-right: 40px;" for="female">Groom</label>
+                      <input type="radio" name="gender" id="female" value="female">
+                    </div>
+                  </fieldset> 
+                </div>
 
 
 
+                <style>
+                  .nested_boxes_gr{
+                    
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  .nested_check_in{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                </style>
+            
+                <select style="width:45%;" name="cars" id="cars">
+                  <option value="" disabled selected>Gender</option>
+                  {% for g in gender %}
+                    {% if g != ('',) %}  
+                    <option value="{{ g }}">{{ g[0] }}</option>
+                    {% endif %}
+                  {% endfor %}
 
+                </select>
+                
+                
+                <select style="width:45%; margin-left:8%;" name="cars" id="cars">
+                  <option value="" disabled selected>Age</option>
+                  {% for i in range(18,80) %}
+                    <option value="{{ i }}">{{ i }}</option>
+                  {% endfor %}
 
-</div>
-</form></div>
-  <select style="width:45%;" name="cars" id="cars">
-    <option value="volvo">Age</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  
-  
-  <select style="width:45%; margin-left:8%;" name="cars" id="cars">
-    <option value="volvo">Age</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  
-  
-  
-  
-  <select style="width:100%;"  name="cars" id="cars">
-    <option value="volvo">Religion</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  
-  <select style="width:100%;"  name="cars" id="cars">
-    <option value="volvo">Caste</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  <select style="width:100%;"  name="cars" id="cars">
-    <option value="volvo">Mariatal status</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  
-  
-  
-  <br><br>
- <div class="text-center">
-      <button type="button" class="btn btn-default"> submit</button>
-    </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+                </select>
+                
+                          
+                          
+                          
+                          
+                          <select style="width:100%;"  name="cars" id="cars">
+                            <option value="" disabled selected>Religion</option>
+                            {% for g in religion %}
+                              {% if g != ('',) %}  
+                              <option value="{{ g }}">{{ g[0] }}</option>
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                          
+                          <select style="width:100%;"  name="cars" id="cars">
+                            <option value="" disabled selected>Caste</option>
+                            {% for g in caste %}
+                              {% if g != ('',) and g != " ('', '', '')" %}  
+                              <option value="{{ g }}">{{ g[0] }}</option>
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                          <select style="width:100%;"  name="cars" id="cars">
+                            <option value="" disabled selected>Marital Status</option>
+                            {% for g in maritalstatus %}
+                              {% if g != ('',) %}  
+                              <option value="{{ g }}">{{ g[0] }}</option>
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                          
+                          
+                          
+                          <br><br>
+                        <div class="text-center">
+                              <button type="button" class="btn btn-default"> submit</button>
+                            </div>
+
+                  </div>
+                          
+                          
+                          
+                          
+                          
+    
 </form>
 
 				</div><!--main-center"-->
