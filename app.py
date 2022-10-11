@@ -15,7 +15,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms import validators
 from wtforms.validators import InputRequired, Email, Length
 import os
-import pandas as pd
+
 import xlrd
 
 
