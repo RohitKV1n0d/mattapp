@@ -98,44 +98,10 @@
               <label for="female">Female</label>
               <input type="radio" name="gender" id="female" value="female">
             </div>
-            </fieldset> 
+            </fieldset>  
 
 
-              <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-              <div class="nested_boxes">
-                <div class="form-row" >
-                  <label style="color: white; padding-right: 40px;">Choose your gender :</label>
-
-                  <div class="form-group">
-                    <div class="nested_check_in"><label><input type="checkbox" class="radio" value="1" name="fooby[1][]" />Male</label></div>
-                  </div>
-                  <div class="form-group">
-                    <div class="nested_check_in"><label><input type="checkbox" class="radio" value="1" name="fooby[1][]" />Female</label></div>
-                  </div> 
-                </div>
-              </div>  
-              
-              <script>
-                // the selector will match all input controls of type :checkbox
-                // and attach a click event handler 
-                $("input:checkbox").on('click', function() {
-                  // in the handler, 'this' refers to the box clicked on
-                  var $box = $(this);
-                  if ($box.is(":checked")) {
-                    // the name of the box is retrieved using the .attr() method
-                    // as it is assumed and expected to be immutable
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    // the checked state of the group/box on the other hand will change
-                    // and the current value is retrieved using .prop() method
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                  } else {
-                    $box.prop("checked", false);
-                  }
-                });
-              </script>  -->
-
+             
               
 
 
@@ -169,6 +135,7 @@
 
             <div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">I have read and agree to the  <span style="color:#0066FF;">terms of use </span>and <span style="color:#0066FF;"> privacy policy </span></label></div>
             <br>
+            <input type="hidden" name="form-name" value="register">
             <button type="submit" form="form1" >Submit 
               <i class="zmdi zmdi-arrow-right"></i>
             </button>
@@ -191,81 +158,108 @@
 				
 				
 				
-					<form action="/action_page.php">
+        <form action="{{ url_for('register') }}" method="post">
  
 
-<div class="nested_boxes"><form>
-<div class="form-row">
-<div class="form-group">
-<div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">Bride</label></div>
-</div>
-<div class="form-group">
-<div class="nested_check_in"><input name="" type="checkbox"> <label class="nested_label">Groom</label></div>
-</div>
+          <div class="nested_boxes" style="padding: 0;">
+          
+           
+                
+              <div class="nested_boxes_gr">
+                <fieldset data-role="controlgroup"  style="margin-bottom: 50px;" class="nested_check_in_gr" >
+                  <!-- <label style="color: rgb(0, 0, 0); padding-right: 40px;">Choose </label> -->
+                  <div class="form-control" >
+                    
+                    <label class="nested_check_in_gr"  style="color: #ff339a; padding-right: 40px;" for="bride" >Bride</label>
+                    <input type="radio" name="userM" id="bride" value="bride" checked>
+                  </div>
+                  <div class="form-control">
+                    <label class="nested_check_in_gr" style="color: #ff339a; padding-right: 40px;" for="groom">Groom</label>
+                    <input type="radio" name="userM" id="groom" value="groom">
+                  </div>
+                </fieldset> 
+              </div>
 
 
 
+              <style>
+                .nested_boxes_gr{
+                  
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                }
+                .nested_check_in_gr{
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-items: center;
+                }
+              </style>
+          
+              <select style="width:45%;" name="gender_s" id="gender_s" required>
+                <option value="" disabled selected>Gender</option>
+                {% for g in gender %}
+                  {% if g != ('',) %}  
+                  <option value="{{ g[0] }}">{{ g[0] }}</option>
+                  {% endif %}
+                {% endfor %}
 
+              </select>
+              
+              
+              <select style="width:45%; margin-left:8%;" name="age_s" id="age_s" required>
+                <option value="" disabled selected>Age</option>
+                {% for i in range(18,80) %}
+                  <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
 
-</div>
-</form></div>
-  <select style="width:45%;" name="cars" id="cars">
-    <option value="volvo">Age</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
+              </select>
+              
+                        
+                        
+                        
+                        
+                        <select style="width:100%;"  name="religion_s" id="religion_s" required>
+                          <option value="" disabled selected>Religion</option>
+                          {% for g in religion %}
+                            {% if g != ('',) %}  
+                            <option value="{{ g[0] }}">{{ g[0] }} </option> 
+                            {% endif %}
+                          {% endfor %}
+                        </select>
+                        
+                        <select style="width:100%;"  name="caste_s" id="caste_s" required>
+                          <option value="" disabled selected>Caste</option>
+                          {% for i in caste %}
+                          
+                            <option value="{{ i }}">{{ i }}</option>
+                            
+                          {% endfor %}
+                        </select>
+                        <select style="width:100%;"  name="maritalstatus_s" id="maritalstatus_s" required>
+                          <option value="" disabled selected>Marital Status</option>
+                          {% for g in maritalstatus %}
+                            {% if g != ('',) %}  
+                            <option value="{{ g[0] }}">{{ g[0] }}</option>
+                            {% endif %}
+                          {% endfor %}
+                        </select>
+                        
+                        
+                        
+                        <br><br>
+                      <div class="text-center">
+            <input type="hidden" name="form-name" value="search">
+            
+                            <button type="submit"  class="btn btn-default">Submit</button>
+                          </div>
+
+          </div>
+                                        
   
-  
-  <select style="width:45%; margin-left:8%;" name="cars" id="cars">
-    <option value="volvo">Age</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  
-  
-  
-  
-  <select style="width:100%;"  name="cars" id="cars">
-    <option value="volvo">Religion</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  
-  <select style="width:100%;"  name="cars" id="cars">
-    <option value="volvo">Caste</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  <select style="width:100%;"  name="cars" id="cars">
-    <option value="volvo">Mariatal status</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>
-  </select>
-  
-  
-  
-  <br><br>
- <div class="text-center">
-      <button type="button" class="btn btn-default"> submit</button>
-    </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-</form>
+        </form>
 
 				</div><!--main-center"-->
 			</div><!--main-->

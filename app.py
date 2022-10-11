@@ -2,9 +2,11 @@
 
 
 
+
+from re import I
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import load_only
+from sqlalchemy import func
 from datetime import datetime
 from flask_admin import Admin ,AdminIndexView, BaseView, expose
 from flask_admin.model.base import BaseModelView
@@ -33,9 +35,9 @@ UPLOAD_FOLDER = 'static/uploads/'
 app.config['UPLOAD_FOLDER_IMPORT'] = UPLOAD_FOLDER
 
 
-ENV = 'dev'
+ENV = 'prod'
 
-if ENV == 'prod' :
+if ENV == 'dev' :
     app.debug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
     app.config['SECRET_KEY'] = 'asdasdasdasdasdasdasdaveqvq34c'
@@ -363,24 +365,88 @@ class LoginForm(FlaskForm):
 @app.route('/')
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    
 
     if current_user.is_authenticated:
         return redirect(url_for('home'))
 
     else:
-        if request.method == 'POST':
-            userDetails = UserDetails(name=request.form['name'],password=request.form['password'], email=request.form['email'] , profileId="TestONLY", userRole="user", premiumPackage="None",
-                                                        contactsLeft=0,gender=request.form['gender'], dob=request.form['dob'], phoneNumber=request.form['phoneNumber'],
-                                                        religion=request.form['religion'], caste=request.form['caste'])
-            try:
-                db.session.add(userDetails)
-                db.session.commit()
-                return redirect('login')
-            except:
-                return 'There was an issue adding your task'
-        else:   
-            userDetails = UserDetails.query.order_by(UserDetails.id).all()
-            return render_template('register_search.html', userDetails=userDetails)
+        
+            if request.method == 'POST':
+                form_name = request.form['form-name']
+                if form_name == 'search':
+                    genders=request.form['gender_s']
+                    # genders="Male"
+                    # religions="christian"	
+                    religions=request.form['religion_s']
+                    castes=request.form['caste_s']
+                    maritalstatuss=request.form['maritalstatus_s']
+                    
+                    # #reture h1 tag
+                    # print(gender)
+                    # return "Your gender : " + gender
+                    searchUser = UserDetails.query.filter((func.lower(UserDetails.gender) == genders.lower()) &
+                                                            (func.lower(UserDetails.religion) == religions.lower()) &
+                                                            (func.lower(UserDetails.caste) == castes.lower()) & 
+                                                            (func.lower(UserDetails.maritalStatus) == maritalstatuss.lower())).all()
+                                                          
+                    cdata=()
+                    l1=[]
+                    for i in searchUser:
+                        cdata=()
+                        dob = str(i.dob)
+                        age = dob[0:2]
+                        cdata=(i.id,i.name,i.religion ,age+" Years old" ,i.complexion ,i.hight , i.maritalStatus, i.residenceAddr, i.educationCategory, i.occupationType, i.caste )
+                        l1.append(cdata)
+                    t1 = tuple(l1)
+                    # print(t1)
+                    return render_template('match-profile.html', searchUser=searchUser, data=t1)
+                  
+                else:
+                    userDetails = UserDetails(name=request.form['name'],password=request.form['password'], email=request.form['email'] , profileId="TestONLY", userRole="user", premiumPackage="None",
+                                                                contactsLeft=0,gender=request.form['gender'], dob=request.form['dob'], phoneNumber=request.form['phoneNumber'],
+                                                                religion=request.form['religion'], caste=request.form['caste'])
+                    try:
+                        db.session.add(userDetails)
+                        db.session.commit()
+                        return redirect('login')
+                    except:
+                        return 'There was an issue adding your task'
+            else:   
+                Gender = FilterDetails.query.with_entities(FilterDetails.gender).all()
+                # age = FilterDetails.query.with_entities(FilterDetails.age).all()
+                Religion = FilterDetails.query.with_entities(FilterDetails.religion).all()
+                CasteC = FilterDetails.query.with_entities(FilterDetails.christianCaste).all()
+                CasteH = FilterDetails.query.with_entities(FilterDetails.hinduCaste).all()
+                CasteM = FilterDetails.query.with_entities(FilterDetails.muslimCaste).all()
+                Cdata=()
+                c1=[]
+                for i in CasteC:
+                    if len(i.christianCaste) != 0:
+                        Cdata=()
+                        Cdata=(i.christianCaste)
+                        c1.append(Cdata)
+                for i in CasteH:
+                    if len(i.hinduCaste) != 0 :
+                        Cdata=()
+                        Cdata=(i.hinduCaste)
+                        c1.append(Cdata)
+                for i in CasteM:
+                    if len(i.muslimCaste) != 0:
+                        Cdata=()
+                        Cdata=(i.muslimCaste)
+                        c1.append(Cdata)
+                x1 = tuple(c1)
+
+
+                Maritalstatus  = FilterDetails.query.with_entities(FilterDetails.maritalstatus).all()
+                # print(Maritalstatus)
+                return render_template('register_search.html', gender=list(Gender),religion=list(Religion),caste=x1,maritalstatus=list(Maritalstatus))
+        
+            
+@app.route('/match', methods=['GET', 'POST'])
+def match():
+    return render_template('match-profile.html')
 
 
 @app.route('/login', methods = ["GET",'POST'])
@@ -403,17 +469,72 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/home')
+
+
+
+
+
+
+@app.route('/home',methods=['GET', 'POST'])
 @login_required
 def home():
-    gender = FilterDetails.query.with_entities(FilterDetails.gender).all()
-    # age = FilterDetails.query.with_entities(FilterDetails.age).all()
-    religion = FilterDetails.query.with_entities(FilterDetails.religion).all()
-    caste = FilterDetails.query.with_entities(FilterDetails.christianCaste,FilterDetails.muslimCaste,FilterDetails.hinduCaste).all()
-    maritalstatus  = FilterDetails.query.with_entities(FilterDetails.maritalstatus).all()
-    
-    print(caste)
-    return render_template('registerDone_search.html',name=current_user.name,role=current_user.userRole,gender=list(gender),religion=list(religion),caste=list(caste),maritalstatus=list(maritalstatus))
+    if request.method == 'POST':
+        genders=request.form['gender_s']
+        # genders="Male"
+        # religions="christian"	
+        religions=request.form['religion_s']
+        castes=request.form['caste_s']
+        maritalstatuss=request.form['maritalstatus_s']
+        
+        # #reture h1 tag
+        # print(gender)
+        # return "Your gender : " + gender
+        searchUser = UserDetails.query.filter((func.lower(UserDetails.gender) == genders.lower()) &
+                                                (func.lower(UserDetails.religion) == religions.lower()) &
+                                                (func.lower(UserDetails.caste) == castes.lower()) &
+                                                (func.lower(UserDetails.maritalStatus) == maritalstatuss.lower())).all()
+                                                
+        cdata=()
+        l1=[]
+        for i in searchUser:
+            cdata=()
+            dob = str(i.dob)
+            age = dob[0:2]
+            cdata=(i.id,i.name,i.religion ,age+" Years old" ,i.complexion ,i.hight , i.maritalStatus, i.residenceAddr, i.educationCategory, i.occupationType,i.caste)
+            l1.append(cdata)
+        t1 = tuple(l1)
+        # print(t1)
+        return render_template('match-profile.html', searchUser=searchUser, data=t1)
+
+    else:
+        Gender = FilterDetails.query.with_entities(FilterDetails.gender).all()
+        # age = FilterDetails.query.with_entities(FilterDetails.age).all()
+        Religion = FilterDetails.query.with_entities(FilterDetails.religion).all()
+        CasteC = FilterDetails.query.with_entities(FilterDetails.christianCaste).all()
+        CasteH = FilterDetails.query.with_entities(FilterDetails.hinduCaste).all()
+        CasteM = FilterDetails.query.with_entities(FilterDetails.muslimCaste).all()
+        Cdata=()
+        c1=[]
+        for i in CasteC:
+            if len(i.christianCaste) != 0:
+                Cdata=()
+                Cdata=(i.christianCaste)
+                c1.append(Cdata)
+        for i in CasteH:
+            if len(i.hinduCaste) != 0 :
+                Cdata=()
+                Cdata=(i.hinduCaste)
+                c1.append(Cdata)
+        for i in CasteM:
+            if len(i.muslimCaste) != 0:
+                Cdata=()
+                Cdata=(i.muslimCaste)
+                c1.append(Cdata)
+        x1 = tuple(c1)
+
+
+        Maritalstatus  = FilterDetails.query.with_entities(FilterDetails.maritalstatus).all()
+        return render_template('registerDone_search.html',name=current_user.name,role=current_user.userRole,gender=list(Gender),religion=list(Religion),caste=x1,maritalstatus=list(Maritalstatus))
 
 
 
