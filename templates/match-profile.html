@@ -12,7 +12,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<!-- STYLE CSS -->
-		<link rel="stylesheet" href="static/css/style.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 		
 		<style>
 		
@@ -316,247 +316,134 @@ input[type=text]:focus {
 <br>
 
 <div class="clearfix"> </div>
-		<div class="wrapper">
-	
-		
-	<div class="inner22">
-<img src="static/image/profile.jpg">
-
-<div class="text-center">
-  
-<div class="col-xs-4"> <div class="dropdown1">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- <i class="fa fa-envelope" aria-hidden="true"></i>
-
-
-  </button>
-  
-</div>  </div>
-<div class="col-xs-4"> <div class="dropdown1">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- <i class="fa fa-heart" aria-hidden="true"></i>
-
-
-  </button>
-  
-</div>  </div>
-<div class="col-xs-4"> <div class="dropdown1">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <i class="fa fa-star" aria-hidden="true"></i>
-
-
-  </button>
-  
-</div>  </div>
-  
-  
-  
-  
+<div class="wrapper">
+{% for info in data %}
 
   
-  
-  
-  
-</div>
+		<!-- IMAGE -->
+<div class="inner22">
+  <img src="static/image/profile.jpg">
+
+  <div class="text-center">
+    
+    <div class="col-xs-4"> 
+      <div class="dropdown1">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+        </button>
+        
+      </div>  
+    </div>
+    <div class="col-xs-4"> 
+      <div class="dropdown1">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        </button>
+      </div>  
+    </div>
+    <div class="col-xs-4"> 
+      <div class="dropdown1">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-star" aria-hidden="true"></i>
+        </button>
+      
+      </div>
+    </div>
+    
+  </div>
 </div>	
 		
 		
-		
-		
-		
-		
-		
-		
-		
-	<div class="inner55">	
-		
-			
-	<div class="text-center">
-  
-  
-  
-  <div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-default">Light</button>
-  
-</div>  </div>
-  
-  
-  
-<div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-danger">Light</button>
-  
-</div>  </div>
-
-
-<div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">christian</button>
-  
-</div>  </div>
-
-<div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">malankara catholic</button>
-  
-</div>  </div>
-  
-  
-  <div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">30</button>
-  
-</div>  </div>
-  
-
- <div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">fair</button>
-  
-</div>  </div> 
- 
- <div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">168cm/65kg</button>
-  
-</div>  </div><div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">unmarried</button>
-  
-</div>  </div> 
- <div class="col-xs-12"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">ernakulam</button>
-  
-</div>  </div>
- 
-  <div class="col-xs-12"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">bsc science</button>
-  
-</div>  </div>
 
 
 
-
-
-
-<div class="col-xs-12"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">bank manager</button>
-  
-</div>  </div>
-</div>	</div>	
-
-
-
-
-
-
-
-
-
-
-
-<div class="inner22">
-<img src="static/image/profile.jpg">
-
-<div class="text-center">
-  
-<div class="col-xs-4"> <div class="dropdown1">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- <i class="fa fa-envelope" aria-hidden="true"></i>
-
-
-  </button>
-  
-</div>  </div>
-<div class="col-xs-4"> <div class="dropdown1">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- <i class="fa fa-heart" aria-hidden="true"></i>
-
-
-  </button>
-  
-</div>  </div>
-<div class="col-xs-4"> <div class="dropdown1">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <i class="fa fa-star" aria-hidden="true"></i>
-
-
-  </button>
-  
-</div>  </div>
-  
-  
-  
-  
-
-  
-  
-  
-  
-</div>
-</div>
-
-
-
-
+<!-- INFO -->
 <div class="inner55">	
-		
-			
 	<div class="text-center">
-  
-  
-  
-  <div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-default">Light</button>
-  
-</div>  </div>
-  
-  
-  
-<div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-danger">Light</button>
-  
-</div>  </div>
-
-
-<div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">christian</button>
-  
-</div>  </div>
-
-<div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">malankara catholic</button>
-  
-</div>  </div>
-  
-  
-  <div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">30</button>
-  
-</div>  </div>
-  
-
- <div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">fair</button>
-  
-</div>  </div> 
+    <div class="col-xs-6"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-default">Light</button>
+      </div>
+    </div>
+    <div class="col-xs-6"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-danger">Light</button>
+      </div>  
+    </div>
+    <div class="col-xs-6"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-info">{{ info[1] }}</button>
+      </div> 
+    </div>
+    <div class="col-xs-6"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-info">{{ info[2] }} / {{ info[10] }}</button>
+      </div>  
+    </div>
+    <div class="col-xs-6"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-info">{{ info[3] }}</button>
+      </div> 
+    </div>
+    <div class="col-xs-6"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-info">{{ info[4] }}</button>
+      </div> 
+    </div> 
  
- <div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">168cm/65kg</button>
-  
-</div>  </div><div class="col-xs-6"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">unmarried</button>
-  
-</div>  </div> 
- <div class="col-xs-12"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">ernakulam</button>
-  
-</div>  </div>
- 
-  <div class="col-xs-12"> <div class="dropdown1">
-  <button type="button" class="btn btn-info">bsc science</button>
-  
-</div>  </div>
+    <div class="col-xs-6"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-info">{{ info[5] }}</button>
+        
+      </div>  
+    </div>
+    <div class="col-xs-6"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-info">{{ info[6] }}</button>
+      </div>  
+    </div> 
+    <div class="col-xs-12"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-info">{{ info[7] }}</button>
+      </div>  
+    </div>
+    <div class="col-xs-12"> 
+      <div class="dropdown1">
+        <button type="button" class="btn btn-info">{{ info[8] }}</button>
+      </div>  
+    </div>
+    <div class="col-xs-12"> 
+      <div class="dropdown1">
+       <button type="button" class="btn btn-info">{{ info[9] }}</button>
+      </div> 
+    </div>
+  </div>	
+</div>	
+
+
+{% endfor %}
+
+<!-- <div>
+  <h1 style="color: black;" >hello</h1>
+  {% for row in data %}
+    {% for cell in row %}
+        <td ><p style="color: black;">{{ cell }}</p> </td>               
+    {% endfor %}
+  {% endfor %}
+
+</div> -->
 
 
 
 
 
 
-<div class="col-xs-12"> <div class="dropdown1">
+
+
+<div class="col-xs-12"> <div class="dropdown1" style="margin-top: 200px;">
+  <h3 style="text-align:center; color: #000;">-----------End of page-----------</h3>
+
+
   <button type="button" class="btn btn-info">bank manager</button>
   
 </div>  </div>
